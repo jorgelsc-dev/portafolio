@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-html
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: nginx-html
+          configMap:
+            name: nginx-html-content
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-content
+data:
+  index.html: |
+    <!-- Tu contenido HTML aquí -->
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000 # Puerto NodePort que permitirá acceder desde afuera
+  type: NodePort
