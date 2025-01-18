@@ -9,21 +9,21 @@ spec:
       containers:
         - name: docker
           image: docker:19.03.12
-          command: ["docker", "build", "-t", "myapp:latest", "/workspace"] # Construir la imagen en /workspace
+          command: ["docker", "build", "-t", "myapp:latest", "/workspace"]  # Construir la imagen en /workspace
           volumeMounts:
             - mountPath: /workspace
               name: workspace
       initContainers:
         - name: clone-repo
           image: alpine:3.14
-          command: ["sh", "-c", "apk add --no-cache git && git clone https://github.com/youruser/yourrepo.git /workspace"] # Clona el repositorio
+          command: ["sh", "-c", "apk add --no-cache git && git clone https://github.com/youruser/yourrepo.git /workspace"]  # Clona el repositorio
           volumeMounts:
             - mountPath: /workspace
               name: workspace
       restartPolicy: Never
       volumes:
         - name: workspace
-          emptyDir: {}
+          emptyDir: {}  # Volumen temporal para construcción
   backoffLimit: 4
 
 ---
@@ -46,6 +46,33 @@ spec:
           image: myapp:latest  # Esta es la imagen local construida por el Job
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace  # Montaje del volumen
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: workspace
+          hostPath:
+            path: /mnt/data/myapp  # Montar el directorio persistente en el nodo
+            type: Directory  # Asegura que sea un directorio
 
 ---
 apiVersion: v1
