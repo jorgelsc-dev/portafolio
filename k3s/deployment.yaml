@@ -1,3 +1,27 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: docker-build-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: docker
+          image: docker:19.03.12 # Usar una imagen de Docker que tenga el comando de docker
+          command: ["docker", "build", "-t", "myapp:latest", "."] # Comando para construir la imagen
+          volumeMounts:
+            - mountPath: /workspace
+              name: workspace
+      restartPolicy: Never
+      volumes:
+        - name: workspace
+          hostPath:
+            path: /path/to/your/app # Ruta al directorio donde está el Dockerfile
+            type: Directory
+  backoffLimit: 4
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +38,21 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: myapp:latest  # Esta es la imagen local
+          image: myapp:latest  # Esta es la imagen local construida por el Job
           ports:
             - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080  # Puerto donde estará accesible el servicio en el nodo
+  type: NodePort
