@@ -1,25 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-web
-  labels:
-    app: my-web
+  name: my-web-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-web
+      app: my-web-app
   template:
     metadata:
       labels:
-        app: my-web
+        app: my-web-app
     spec:
       containers:
-      - name: my-web
-        image: testing/my-web:latest  # Aquí es donde Rancher gestionará la imagen
+      - name: my-web-app
+        image: my-web-app:latest # Usamos la imagen local
         ports:
         - containerPort: 80
-        imagePullPolicy: Always  # Asegura que siempre se obtenga la última versión de la imagen
+        volumeMounts:
+          - name: web-content
+            mountPath: /usr/share/nginx/html
+      volumes:
+        - name: web-content
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
@@ -27,7 +30,7 @@ metadata:
   name: my-web-service
 spec:
   selector:
-    app: my-web
+    app: my-web-app
   ports:
     - protocol: TCP
       port: 80
