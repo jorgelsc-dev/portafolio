@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: myapp:latest  # La imagen se construye y ejecuta localmente
+          image: myapp:latest  # Esta es la imagen local
           ports:
-            - containerPort: 80  # Puerto donde la app escucha
+            - containerPort: 80
