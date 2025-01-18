@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: web-app-ingress
+  name: my-web-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: webapp.local  # Cambia esto por el dominio que quieras usar
+  - host: 172.16.0.3  # Cambia esto por tu dominio o dirección IP
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: web-app-service  # Nombre del servicio al que dirigir el tráfico
+            name: my-web-service
             port:
               number: 80
