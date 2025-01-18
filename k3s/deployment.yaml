@@ -1,38 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-web-app
+  name: myapp-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: my-web-app
+      app: myapp
   template:
     metadata:
       labels:
-        app: my-web-app
+        app: myapp
     spec:
       containers:
-      - name: my-web-app
-        image: my-web-app:latest # Usamos la imagen local
-        ports:
-        - containerPort: 80
-        volumeMounts:
-          - name: web-content
-            mountPath: /usr/share/nginx/html
-      volumes:
-        - name: web-content
-          emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-web-service
-spec:
-  selector:
-    app: my-web-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: ClusterIP  # Se puede cambiar a LoadBalancer si deseas exposición externa
+        - name: myapp
+          image: myapp:latest  # La imagen se construye y ejecuta localmente
+          ports:
+            - containerPort: 80  # Puerto donde la app escucha
