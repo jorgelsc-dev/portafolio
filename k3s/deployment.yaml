@@ -8,17 +8,22 @@ spec:
     spec:
       containers:
         - name: docker
-          image: docker:19.03.12 # Usar una imagen de Docker que tenga el comando de docker
-          command: ["docker", "build", "-t", "myapp:latest", "."] # Comando para construir la imagen
+          image: docker:19.03.12
+          command: ["docker", "build", "-t", "myapp:latest", "/workspace"] # Construir la imagen en /workspace
+          volumeMounts:
+            - mountPath: /workspace
+              name: workspace
+      initContainers:
+        - name: clone-repo
+          image: alpine:3.14
+          command: ["sh", "-c", "apk add --no-cache git && git clone https://github.com/youruser/yourrepo.git /workspace"] # Clona el repositorio
           volumeMounts:
             - mountPath: /workspace
               name: workspace
       restartPolicy: Never
       volumes:
         - name: workspace
-          hostPath:
-            path: /path/to/your/app # Ruta al directorio donde está el Dockerfile
-            type: Directory
+          emptyDir: {}
   backoffLimit: 4
 
 ---
