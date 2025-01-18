@@ -1,18 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-web-app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: myapp-ingress
 spec:
   rules:
-  - host: localhost  # Usa 'localhost' o una IP pública en vez de una dirección privada
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-web-app-service
-            port:
-              number: 80
+    - host: "172.16.0.3"  # Reemplaza con la IP o dominio de tu clúster
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp-service
+                port:
+                  number: 80
