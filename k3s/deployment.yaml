@@ -41,6 +41,13 @@ spec:
       labels:
         app: myapp
     spec:
+      initContainers:
+        - name: create-dir
+          image: busybox
+          command: ["sh", "-c", "mkdir -p /mnt/data/myapp"]  # Crear el directorio en el nodo
+          volumeMounts:
+            - name: workspace
+              mountPath: /mnt/data
       containers:
         - name: myapp
           image: myapp:latest  # Esta es la imagen local construida por el Job
@@ -48,7 +55,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: workspace
-              mountPath: /workspace  # Montaje del volumen
+              mountPath: /mnt/data/myapp  # Montaje del volumen
           resources:
             requests:
               memory: "256Mi"
@@ -71,8 +78,8 @@ spec:
       volumes:
         - name: workspace
           hostPath:
-            path: /mnt/data/myapp  # Montar el directorio persistente en el nodo
-            type: Directory  # Asegura que sea un directorio
+            path: /mnt/data/myapp  # Montaje en el directorio del nodo
+            type: DirectoryOrCreate  # Asegura que se cree si no existe
 
 ---
 apiVersion: v1
