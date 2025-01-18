@@ -21,13 +21,13 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: nginx-html
-              mountPath: /usr/share/nginx/html
+              mountPath: /usr/share/nginx/html  # Aquí es donde Nginx busca los archivos HTML
       volumes:
         - name: nginx-html
           gitRepo:
-            repository: https://github.com/jorgelsc-dev/portafolio.git
-            revision: main
-            directory: / # Directorio raíz dentro del repositorio donde están los archivos HTML
+            repository: https://github.com/jorgelsc-dev/portafolio.git  # URL del repositorio
+            revision: main  # Rama del repositorio (cambia si es diferente)
+            directory: /  # Ruta de los archivos dentro del repositorio (puedes ajustarlo si es necesario)
 ---
 apiVersion: v1
 kind: Service
@@ -40,5 +40,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30000  # Puerto NodePort que permitirá acceder desde afuera
+      nodePort: 30000  # Puerto NodePort para acceso externo
   type: NodePort
