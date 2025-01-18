@@ -4,7 +4,7 @@ metadata:
   name: myapp-ingress
 spec:
   rules:
-    - host: "172.16.0.3"  # Reemplaza con la IP o dominio de tu clúster
+    - host: "localhost"  # Reemplaza con la IP o dominio de tu clúster
       http:
         paths:
           - path: /
