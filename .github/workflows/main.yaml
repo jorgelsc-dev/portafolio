@@ -41,12 +41,16 @@ jobs:
           EVENT_TYPE="Pull Request"
         fi
 
-        # Construye el mensaje con saltos de línea correctamente
-        MESSAGE="📝 $EVENT_TYPE en $GITHUB_REPOSITORY\n\n"
-        MESSAGE+="👤 Actor: $ACTOR\n"
-        MESSAGE+="🌿 Rama: $BRANCH\n"
-        MESSAGE+="📄 Mensaje del commit/PR: $COMMIT_MESSAGE\n\n"
-        MESSAGE+="📤 Output del comando: Ver archivo adjunto."
+        # Construye el mensaje con separación simple entre líneas
+        MESSAGE="📝 $EVENT_TYPE en $GITHUB_REPOSITORY"
+        MESSAGE="$MESSAGE  "  # Añadimos un espacio vacío para separar la siguiente línea
+        MESSAGE="$MESSAGE👤 Actor: $ACTOR"
+        MESSAGE="$MESSAGE  "
+        MESSAGE="$MESSAGE🌿 Rama: $BRANCH"
+        MESSAGE="$MESSAGE  "
+        MESSAGE="$MESSAGE📄 Mensaje del commit/PR: $COMMIT_MESSAGE"
+        MESSAGE="$MESSAGE  "
+        MESSAGE="$MESSAGE📤 Output del comando: Ver archivo adjunto."
 
         # Guarda el mensaje en una variable de salida
         echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
@@ -57,5 +61,4 @@ jobs:
         curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
           -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
           -F document=@"output.txt" \
-          -F caption="${{ steps.prepare_message.outputs.MESSAGE }}" \
-          -F parse_mode="Markdown"
+          -F caption="${{ steps.prepare_message.outputs.MESSAGE }}"
