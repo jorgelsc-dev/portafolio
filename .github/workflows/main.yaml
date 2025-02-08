@@ -41,11 +41,11 @@ jobs:
           EVENT_TYPE="Pull Request"
         fi
 
-        # Construye el mensaje
-        MESSAGE="📝 *$EVENT_TYPE en $GITHUB_REPOSITORY*\n\n"
-        MESSAGE+="👤 *Actor:* $ACTOR\n"
-        MESSAGE+="🌿 *Rama:* $BRANCH\n"
-        MESSAGE+="📄 *Mensaje del commit/PR:* $COMMIT_MESSAGE\n\n"
+        # Construye el mensaje con saltos de línea correctamente
+        MESSAGE=$(printf "📝 *%s en %s*\n\n" "$EVENT_TYPE" "$GITHUB_REPOSITORY")
+        MESSAGE+=$(printf "👤 *Actor:* %s\n" "$ACTOR")
+        MESSAGE+=$(printf "🌿 *Rama:* %s\n" "$BRANCH")
+        MESSAGE+=$(printf "📄 *Mensaje del commit/PR:* %s\n\n" "$COMMIT_MESSAGE")
         MESSAGE+="📤 *Output del comando:* Ver archivo adjunto."
 
         # Guarda el mensaje en una variable de salida
