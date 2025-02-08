@@ -3,7 +3,7 @@ name: Telegram Notification Workflow
 on:
   push:
     branches:
-      - main  # Cambia esto al branch que desees monitorear
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 
