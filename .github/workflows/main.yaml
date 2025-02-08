@@ -1,0 +1,61 @@
+name: Telegram Notification Workflow
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto al branch que desees monitorear
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run commands and save output to a file
+      run: |
+        # Ejecuta tus comandos aquí
+        echo "Iniciando el proceso..."
+        OUTPUT=$(ls -la 2>&1)  # Ejemplo de comando
+        STATUS=$?
+
+        # Guarda el output en un archivo de texto
+        echo "$OUTPUT" > output.txt
+
+    - name: Prepare Telegram message
+      id: prepare_message
+      run: |
+        # Obtén información adicional del evento
+        if [ "$GITHUB_EVENT_NAME" == "push" ]; then
+          ACTOR=$GITHUB_ACTOR
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          BRANCH=${GITHUB_REF#refs/heads/}
+          EVENT_TYPE="Push"
+        elif [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
+          ACTOR=$GITHUB_ACTOR
+          COMMIT_MESSAGE=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
+          BRANCH=$(jq -r '.pull_request.head.ref' $GITHUB_EVENT_PATH)
+          EVENT_TYPE="Pull Request"
+        fi
+
+        # Construye el mensaje
+        MESSAGE="📝 *$EVENT_TYPE en $GITHUB_REPOSITORY*\n\n"
+        MESSAGE+="👤 *Actor:* $ACTOR\n"
+        MESSAGE+="🌿 *Rama:* $BRANCH\n"
+        MESSAGE+="📄 *Mensaje del commit/PR:* $COMMIT_MESSAGE\n\n"
+        MESSAGE+="📤 *Output del comando:* Ver archivo adjunto."
+
+        # Guarda el mensaje en una variable de salida
+        echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
+
+    - name: Send message and file to Telegram
+      run: |
+        # Envía el archivo adjunto a Telegram
+        curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
+          -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -F document=@"output.txt" \
+          -F caption="${{ steps.prepare_message.outputs.MESSAGE }}" \
+          -F parse_mode="Markdown"
