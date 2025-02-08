@@ -42,14 +42,11 @@ jobs:
         fi
 
         # Construye el mensaje con saltos de línea correctamente
-        MESSAGE=$(printf "📝 *%s en %s*\n\n" "$EVENT_TYPE" "$GITHUB_REPOSITORY")
-        MESSAGE+=$(printf "👤 *Actor:* %s\n" "$ACTOR")
-        MESSAGE+=$(printf "🌿 *Rama:* %s\n" "$BRANCH")
-        MESSAGE+=$(printf "📄 *Mensaje del commit/PR:* %s\n\n" "$COMMIT_MESSAGE")
-        MESSAGE+="📤 *Output del comando:* Ver archivo adjunto."
-
-        # Escapar los caracteres especiales para MarkdownV2
-        MESSAGE=$(echo "$MESSAGE" | sed 's/[&]/\\&/g' | sed 's/[_*[\]()~>`#{}+.!|-]/\\&/g')
+        MESSAGE="📝 $EVENT_TYPE en $GITHUB_REPOSITORY\n\n"
+        MESSAGE+="👤 Actor: $ACTOR\n"
+        MESSAGE+="🌿 Rama: $BRANCH\n"
+        MESSAGE+="📄 Mensaje del commit/PR: $COMMIT_MESSAGE\n\n"
+        MESSAGE+="📤 Output del comando: Ver archivo adjunto."
 
         # Guarda el mensaje en una variable de salida
         echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
@@ -61,4 +58,4 @@ jobs:
           -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
           -F document=@"output.txt" \
           -F caption="${{ steps.prepare_message.outputs.MESSAGE }}" \
-          -F parse_mode="MarkdownV2"
+          -F parse_mode="Markdown"
