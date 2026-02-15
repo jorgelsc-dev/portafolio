@@ -1,116 +1,22 @@
-# Node.js
+# Dependencies
 node_modules/
-npm-debug.log
-yarn-error.log
-yarn.lock
-
-# Python
-*.pyc
-*.pyo
-__pycache__/
-*.pyd
-*.pdb
-*.egg
-*.egg-info
-dist/
-build/
-venv/
-env/
-
-# Java
-*.class
-*.jar
-*.war
-*.ear
-*.db
-*.log
-
-# Ruby
-*.gem
-*.rbc
-.bundle/
-config.ru
-*.log
-*.swp
-*.sass-cache/
-.yardoc
-coverage/
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-
-# Windows
-Thumbs.db
-ehthumbs.db
-
-# Linux
-*~
-.nfs*
-
-# JetBrains
-.idea/
-*.iml
-
-# Visual Studio
-.vscode/
-.vs/
-.vscode-test/
-
-# Eclipse
-.settings/
-.project
-.classpath
-
-# IntelliJ
-.idea/
-*.iws
-*.iml
-
-# Build directories
-build/
-dist/
 
 # Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 *.log
-*.out
-*.err
 
-# Dependency directories
-node_modules/
-bower_components/
+# Vite cache
+.vite/
 
-# Docker
-.docker/
-Dockerfile
-docker-compose.yml
-.dockerignore
-
-# .env files
+# Env files
 .env
-.env.local
 .env.*.local
 
-# IDEs
-*.sublime-workspace
-*.sublime-project
-
-# Linux
-*.swp
-
-# Other IDEs
-*.vscode
-*.idea/
-*.sublime-project
-*.sublime-workspace
-
-# OS-specific
+# Editor / OS
 .DS_Store
 Thumbs.db
-
-# Editor temporary files
-*~
-*.bak
-*.swp
+.vscode/
+.idea/
