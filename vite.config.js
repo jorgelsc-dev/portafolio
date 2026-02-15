@@ -10,8 +10,8 @@ export default defineConfig({
     })
   ],
   build: {
-    outDir: "dist",
+    // GitHub Pages (Deploy from branch) only allows /(root) or /docs as source.
+    outDir: "docs",
     emptyOutDir: true
   }
 });
-
