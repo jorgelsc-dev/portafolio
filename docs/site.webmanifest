@@ -1,5 +1,5 @@
 {
-  "name": "Jorge LSC | Portafolio",
+  "name": "Jorge LSC | Ciberseguridad y DevOps",
   "short_name": "Jorge LSC",
   "start_url": "/",
   "display": "standalone",
@@ -10,4 +10,3 @@
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
-
