@@ -308,6 +308,10 @@ body::after {
   color: rgba(255, 255, 255, 0.78);
 }
 
+.facts strong {
+  color: rgba(255, 255, 255, 0.92);
+}
+
 .hint {
   margin: 10px 0 0;
   font-size: 0.92rem;
@@ -327,6 +331,41 @@ body::after {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.exp-card,
+.detail-card {
+  height: 100%;
+}
+
+.exp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.exp-period {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(163, 230, 53, 0.8);
+}
+
+.exp-company {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.exp-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .project-top {
@@ -356,6 +395,33 @@ body::after {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
+}
+
+.project-note {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cert-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cert-name {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.cert-meta {
+  margin: 2px 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.92rem;
 }
 
 .contact-actions {
@@ -403,4 +469,3 @@ body::after {
     transition: none !important;
   }
 }
-

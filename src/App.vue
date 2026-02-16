@@ -66,17 +66,18 @@
               <p class="hero-subtitle">{{ profile.headline }}</p>
 
               <div class="hero-actions">
-                <v-btn color="primary" variant="flat" rounded="lg" size="large" @click="scrollTo('proyectos')">
-                  Ver proyectos
+                <v-btn color="primary" variant="flat" rounded="lg" size="large" @click="scrollTo('experiencia')">
+                  Ver experiencia
                   <v-icon end icon="mdi-arrow-right" />
                 </v-btn>
                 <v-btn variant="tonal" rounded="lg" size="large" @click="scrollTo('sobre-mi')">Sobre mí</v-btn>
               </div>
 
-              <div class="hero-badges" aria-label="Enfoques">
-                <span class="badge"><v-icon icon="mdi-speedometer" size="18" /><span>Performance</span></span>
-                <span class="badge"><v-icon icon="mdi-search-web" size="18" /><span>SEO</span></span>
-                <span class="badge"><v-icon icon="mdi-accessibility" size="18" /><span>Accesibilidad</span></span>
+              <div class="hero-badges" aria-label="Especialidades">
+                <span v-for="badge in heroBadges" :key="badge.label" class="badge">
+                  <v-icon :icon="badge.icon" size="18" />
+                  <span>{{ badge.label }}</span>
+                </span>
               </div>
             </v-col>
 
@@ -91,10 +92,10 @@
                   </div>
 
                   <div class="mini-grid" aria-label="Enfoques de trabajo">
-                    <div class="mini-item"><div class="mini-k">Enfoque</div><div class="mini-v">UI + DX</div></div>
-                    <div class="mini-item"><div class="mini-k">Entrega</div><div class="mini-v">Calidad</div></div>
-                    <div class="mini-item"><div class="mini-k">Código</div><div class="mini-v">Limpio</div></div>
-                    <div class="mini-item"><div class="mini-k">Diseño</div><div class="mini-v">Cuidado</div></div>
+                    <div v-for="item in operatingModel" :key="item.k" class="mini-item">
+                      <div class="mini-k">{{ item.k }}</div>
+                      <div class="mini-v">{{ item.v }}</div>
+                    </div>
                   </div>
                 </v-card-text>
               </v-card>
@@ -108,7 +109,8 @@
           <div class="section-head">
             <h2 class="section-title">Sobre mí</h2>
             <p class="section-desc">
-              Trabajo desde la idea hasta la implementación, cuidando performance, semántica y detalles visuales.
+              Ingeniero en Ciencias Informáticas orientado a ciberseguridad ofensiva/defensiva, automatización y
+              operación segura de infraestructuras críticas.
             </p>
           </div>
 
@@ -117,13 +119,17 @@
               <v-card class="glass" rounded="xl" elevation="0">
                 <v-card-text class="prose">
                   <p>
-                    Soy <strong>{{ profile.name }}</strong>, desarrollador enfocado en crear productos web que se sientan
-                    rápidos y sólidos. Me gusta diseñar sistemas de UI consistentes, y mantener el código simple,
-                    testeable y fácil de extender.
+                    Soy <strong>{{ profile.name }}</strong>, especialista en ciberseguridad, DevOps y arquitectura cloud
+                    con más de 6 años de experiencia. He trabajado en SOC, operaciones Red/Blue Team y despliegue de
+                    plataformas seguras en producción.
                   </p>
                   <p>
-                    Este portafolio está hecho con <strong>Vue 3 + Vuetify</strong> y está optimizado para SEO
-                    (metadatos, Open Graph, JSON-LD, sitemap y robots).
+                    Mi enfoque combina respuesta a incidentes, hardening, SIEM, automatización con CI/CD y Kubernetes
+                    para reducir riesgos operativos y mejorar continuidad de negocio.
+                  </p>
+                  <p>
+                    Busco integrarme en equipos multidisciplinarios donde pueda aportar mediante cultura DevSecOps,
+                    mitigación proactiva y mejora continua.
                   </p>
                 </v-card-text>
               </v-card>
@@ -135,8 +141,8 @@
                 <v-card-text>
                   <ul class="facts">
                     <li><v-icon icon="mdi-map-marker" size="18" /><span>{{ profile.location }}</span></li>
-                    <li><v-icon icon="mdi-translate" size="18" /><span>Español / Inglés</span></li>
-                    <li><v-icon icon="mdi-rocket-launch" size="18" /><span>Disponible para proyectos</span></li>
+                    <li><v-icon icon="mdi-translate" size="18" /><span>{{ profile.languagesSummary }}</span></li>
+                    <li><v-icon icon="mdi-briefcase-check-outline" size="18" /><span>{{ profile.availability }}</span></li>
                   </ul>
 
                   <div class="mt-4">
@@ -153,15 +159,43 @@
         </v-container>
       </section>
 
+      <section id="experiencia" class="section" aria-label="Experiencia">
+        <v-container class="py-16">
+          <div class="section-head">
+            <h2 class="section-title">Experiencia</h2>
+            <p class="section-desc">
+              Trayectoria reciente en ciberseguridad, operaciones SOC y plataformas cloud para servicios de misión crítica.
+            </p>
+          </div>
+
+          <v-row class="mt-8" align="stretch">
+            <v-col cols="12" md="6" v-for="item in experience" :key="`${item.role}-${item.company}`">
+              <v-card class="glass exp-card" rounded="xl" elevation="0">
+                <v-card-text>
+                  <div class="exp-head">
+                    <p class="exp-period">{{ item.period }}</p>
+                    <p class="exp-company">{{ item.company }}</p>
+                  </div>
+                  <h3 class="project-title">{{ item.role }}</h3>
+                  <ul class="exp-list">
+                    <li v-for="point in item.highlights" :key="point">{{ point }}</li>
+                  </ul>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
       <section id="skills" class="section" aria-label="Skills">
         <v-container class="py-16">
           <div class="section-head">
             <h2 class="section-title">Skills</h2>
-            <p class="section-desc">Tecnologías con las que trabajo regularmente.</p>
+            <p class="section-desc">Tecnologías y herramientas que aplico en operaciones y despliegues reales.</p>
           </div>
 
           <v-row class="mt-8">
-            <v-col cols="12" md="6" lg="4" v-for="group in skills" :key="group.title">
+            <v-col cols="12" md="6" lg="6" v-for="group in skills" :key="group.title">
               <v-card class="glass" rounded="xl" elevation="0">
                 <v-card-title class="text-h6">{{ group.title }}</v-card-title>
                 <v-card-text>
@@ -181,11 +215,11 @@
         <v-container class="py-16">
           <div class="section-head">
             <h2 class="section-title">Proyectos</h2>
-            <p class="section-desc">Una muestra de lo que puedo construir. Reemplaza los links por tus repos/demos reales.</p>
+            <p class="section-desc">Casos relevantes en ciberseguridad, analítica y automatización operativa.</p>
           </div>
 
           <v-row class="mt-8">
-            <v-col cols="12" md="6" lg="4" v-for="p in projects" :key="p.title">
+            <v-col cols="12" md="6" v-for="p in projects" :key="p.title">
               <v-card class="glass project" rounded="xl" elevation="0">
                 <div class="project-top">
                   <div class="project-badge" v-if="p.featured">Destacado</div>
@@ -200,11 +234,77 @@
                   </div>
                 </v-card-text>
                 <v-card-actions class="px-4 pb-4">
-                  <v-btn :href="p.demo" target="_blank" rel="noopener" variant="tonal" color="primary" :disabled="!p.demo">
-                    Demo
+                  <v-btn v-if="p.demo" :href="p.demo" target="_blank" rel="noopener" variant="tonal" color="primary">
+                    Caso de estudio
                   </v-btn>
-                  <v-btn :href="p.code" target="_blank" rel="noopener" variant="text" :disabled="!p.code">Código</v-btn>
+                  <v-btn v-if="p.code" :href="p.code" target="_blank" rel="noopener" variant="text">Repositorio</v-btn>
+                  <p v-if="!p.demo && !p.code" class="project-note">Proyecto interno o sin enlace público.</p>
                 </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="formacion" class="section" aria-label="Formación y certificaciones">
+        <v-container class="py-16">
+          <div class="section-head">
+            <h2 class="section-title">Formación y certificaciones</h2>
+            <p class="section-desc">Base académica y especialización continua en seguridad, redes y gestión de calidad.</p>
+          </div>
+
+          <v-row class="mt-8" align="stretch">
+            <v-col cols="12" md="6">
+              <v-card class="glass detail-card" rounded="xl" elevation="0">
+                <v-card-title class="text-h6">Educación</v-card-title>
+                <v-card-text>
+                  <ul class="facts">
+                    <li v-for="item in education" :key="item.degree">
+                      <v-icon icon="mdi-school-outline" size="18" />
+                      <span><strong>{{ item.degree }}</strong><br />{{ item.institution }}</span>
+                    </li>
+                  </ul>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <v-col cols="12" md="6">
+              <v-card class="glass detail-card" rounded="xl" elevation="0">
+                <v-card-title class="text-h6">Certificaciones</v-card-title>
+                <v-card-text>
+                  <ul class="cert-list">
+                    <li v-for="cert in certifications" :key="cert.name">
+                      <p class="cert-name">{{ cert.name }}</p>
+                      <p class="cert-meta">{{ cert.issuer }} · {{ cert.year }}</p>
+                    </li>
+                  </ul>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <v-col cols="12" md="6">
+              <v-card class="glass detail-card" rounded="xl" elevation="0">
+                <v-card-title class="text-h6">Idiomas</v-card-title>
+                <v-card-text>
+                  <div class="chips">
+                    <v-chip v-for="lang in languages" :key="lang" variant="tonal" color="primary" class="ma-1">
+                      {{ lang }}
+                    </v-chip>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <v-col cols="12" md="6">
+              <v-card class="glass detail-card" rounded="xl" elevation="0">
+                <v-card-title class="text-h6">Soft skills</v-card-title>
+                <v-card-text>
+                  <div class="chips">
+                    <v-chip v-for="item in softSkills" :key="item" variant="tonal" color="secondary" class="ma-1">
+                      {{ item }}
+                    </v-chip>
+                  </div>
+                </v-card-text>
               </v-card>
             </v-col>
           </v-row>
@@ -215,7 +315,9 @@
         <v-container class="py-16">
           <div class="section-head">
             <h2 class="section-title">Contacto</h2>
-            <p class="section-desc">Si tienes una idea o necesitas apoyo en un proyecto, hablemos.</p>
+            <p class="section-desc">
+              Si tu organización necesita fortalecer su postura de seguridad y automatizar operación, conversemos.
+            </p>
           </div>
 
           <v-row class="mt-8" align="stretch">
@@ -223,11 +325,17 @@
               <v-card class="glass" rounded="xl" elevation="0">
                 <v-card-text class="prose">
                   <p><strong>Email:</strong> <a :href="'mailto:' + profile.email">{{ profile.email }}</a></p>
-                  <p><strong>Dominio:</strong> <a href="https://jorgelsc.dev/" rel="noopener">jorgelsc.dev</a></p>
+                  <p><strong>Teléfono:</strong> <a :href="'tel:' + profile.phoneDial">{{ profile.phone }}</a></p>
+                  <p><strong>Ubicación:</strong> {{ profile.location }}</p>
+                  <p><strong>Disponibilidad:</strong> {{ profile.availability }}</p>
                   <div class="contact-actions">
                     <v-btn color="primary" variant="flat" rounded="lg" :href="'mailto:' + profile.email">
                       <v-icon start icon="mdi-email-outline" />
                       Enviar email
+                    </v-btn>
+                    <v-btn variant="tonal" rounded="lg" :href="'tel:' + profile.phoneDial">
+                      <v-icon start icon="mdi-phone-outline" />
+                      Llamar
                     </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="profile.github" target="_blank" rel="noopener" :disabled="!profile.github">
                       <v-icon start icon="mdi-github" />
@@ -245,20 +353,19 @@
                       LinkedIn
                     </v-btn>
                   </div>
-                  <p class="hint">Edita tus links en <code>src/App.vue</code>.</p>
                 </v-card-text>
               </v-card>
             </v-col>
 
             <v-col cols="12" md="5">
               <v-card class="glass" rounded="xl" elevation="0">
-                <v-card-title class="text-h6">Checklist SEO</v-card-title>
+                <v-card-title class="text-h6">Objetivo profesional</v-card-title>
                 <v-card-text>
                   <ul class="facts">
-                    <li><v-icon icon="mdi-check-circle-outline" size="18" /><span>Meta tags + canonical</span></li>
-                    <li><v-icon icon="mdi-check-circle-outline" size="18" /><span>Open Graph + Twitter</span></li>
-                    <li><v-icon icon="mdi-check-circle-outline" size="18" /><span>JSON-LD (schema.org)</span></li>
-                    <li><v-icon icon="mdi-check-circle-outline" size="18" /><span>Sitemap + robots</span></li>
+                    <li v-for="goal in profileGoals" :key="goal">
+                      <v-icon icon="mdi-check-circle-outline" size="18" />
+                      <span>{{ goal }}</span>
+                    </li>
                   </ul>
                 </v-card-text>
               </v-card>
@@ -288,57 +395,211 @@ const setThemeColorMeta = inject("setThemeColorMeta", () => {});
 const profile = {
   name: "Jorge Luis Sánchez Casanova",
   shortName: "Jorge LSC",
-  kicker: "Frontend Developer",
-  headline: "Construyo experiencias web rápidas, accesibles y con diseño cuidado.",
-  location: "Remoto (LatAm)",
-  email: "hola@jorgelsc.dev",
-  github: "",
-  linkedin: ""
+  kicker: "Especialista en Ciberseguridad | Ingeniero DevOps | Arquitecto Cloud",
+  headline: "Más de 6 años en Red/Blue Team, SOC, DevSecOps y operación multi-cloud sobre AWS y Alibaba Cloud.",
+  location: "La Habana, Cuba",
+  availability: "Disponible para trabajo remoto e internacional",
+  languagesSummary: "Español nativo / Inglés técnico (básico)",
+  email: "jorgeluis961224@gmail.com",
+  phone: "+53 55375310",
+  phoneDial: "+5355375310",
+  github: "https://github.com/jorgelsc-dev",
+  linkedin: "https://www.linkedin.com/in/jorgelsc-dev"
 };
 
 const nav = [
   { id: "inicio", label: "Inicio" },
   { id: "sobre-mi", label: "Sobre mí" },
+  { id: "experiencia", label: "Experiencia" },
   { id: "skills", label: "Skills" },
   { id: "proyectos", label: "Proyectos" },
+  { id: "formacion", label: "Formación" },
   { id: "contacto", label: "Contacto" }
 ];
 
 const navDesktop = nav.filter((i) => i.id !== "contacto");
 
-const featuredSkills = ["Vue 3", "Vuetify", "TypeScript", "Vite", "Node.js", "SEO"];
+const heroBadges = [
+  { icon: "mdi-shield-sword-outline", label: "Red Team / Blue Team" },
+  { icon: "mdi-source-branch", label: "DevSecOps" },
+  { icon: "mdi-cloud-lock-outline", label: "AWS + Alibaba Cloud" }
+];
+
+const featuredSkills = ["AWS EKS", "Alibaba ACK", "EC2/ECS", "S3/OSS", "GitLab CI", "Python"];
+
+const operatingModel = [
+  { k: "Enfoque", v: "Seguridad + Automatización" },
+  { k: "Entrega", v: "HA + Continuidad" },
+  { k: "Respuesta", v: "Incidentes críticos" },
+  { k: "Objetivo", v: "Mitigación proactiva" }
+];
+
+const experience = [
+  {
+    role: "Ingeniero DevOps",
+    company: "TECOPOS",
+    period: "Ene 2025 - Actualidad",
+    highlights: [
+      "Administración multi-cloud sobre AWS y Alibaba Cloud en entornos de alta disponibilidad.",
+      "Automatización de despliegues con CI/CD en GitLab CI y GitHub Actions.",
+      "Orquestación de contenedores con Kubernetes (AWS EKS, Alibaba ACK, k3s, Rancher).",
+      "Operación de servicios cloud: EC2/ECS, S3/OSS, VPC, IAM/RAM, RDS, ELB/SLB, CloudWatch/CloudMonitor.",
+      "Optimización de PostgreSQL, HAProxy y Nginx para entornos críticos."
+    ]
+  },
+  {
+    role: "Jefe de Ciberseguridad",
+    company: "Avangenio S.R.L.",
+    period: "Jul 2024",
+    highlights: [
+      "Definición y ejecución de estrategia integral de ciberseguridad.",
+      "Auditorías internas y pentesting sobre sistemas de negocio.",
+      "Implementación de controles ISO 27001 y hardening de red."
+    ]
+  },
+  {
+    role: "Especialista Nivel 3 (SOC)",
+    company: "ETECSA",
+    period: "Nov 2023 - May 2024",
+    highlights: [
+      "Respuesta en tiempo real a incidentes de alta criticidad.",
+      "Despliegue y afinamiento de SIEM con Elastic Stack.",
+      "Operaciones Red Team con explotación controlada e informes técnicos."
+    ]
+  },
+  {
+    role: "Especialista en Ciberseguridad",
+    company: "OSRI CuCERT",
+    period: "Ene 2021 - Nov 2023",
+    highlights: [
+      "Mitigación de ataques en redes nacionales.",
+      "Monitoreo y análisis de tráfico con Suricata IDS/IPS.",
+      "Mentoría en análisis forense digital y respuesta a incidentes."
+    ]
+  }
+];
 
 const skills = [
-  { title: "Frontend", items: ["Vue 3", "Vuetify", "TypeScript", "JavaScript", "HTML", "CSS"] },
-  { title: "Backend", items: ["Node.js", "REST APIs", "Auth", "SQL (básico)"] },
-  { title: "Tooling", items: ["Git", "Docker", "CI/CD", "Testing", "Linux"] }
+  {
+    title: "Ciberseguridad",
+    items: ["Elastic Stack (SIEM)", "Suricata IDS/IPS", "Forense digital", "Pentesting", "Nmap", "Burp Suite", "OWASP ZAP", "Zero Trust"]
+  },
+  {
+    title: "DevOps y Cloud",
+    items: [
+      "AWS EKS",
+      "AWS EC2",
+      "AWS ECS",
+      "AWS ECR",
+      "AWS S3",
+      "AWS IAM",
+      "AWS VPC",
+      "AWS RDS",
+      "AWS ELB/ALB",
+      "AWS Route 53",
+      "AWS CloudWatch",
+      "AWS CloudTrail",
+      "AWS Auto Scaling",
+      "AWS Lambda",
+      "AWS WAF",
+      "AWS KMS",
+      "AWS Systems Manager",
+      "Alibaba ACK",
+      "Alibaba ECS",
+      "Alibaba OSS",
+      "Alibaba Container Registry",
+      "Alibaba RAM",
+      "Alibaba VPC",
+      "Alibaba SLB",
+      "Alibaba RDS",
+      "Alibaba CloudMonitor",
+      "Alibaba ActionTrail",
+      "Alibaba DNS",
+      "Alibaba NAT Gateway",
+      "Alibaba CDN",
+      "Alibaba WAF",
+      "Docker",
+      "Kubernetes",
+      "k3s",
+      "Rancher",
+      "GitOps",
+      "GitLab CI",
+      "GitHub Actions"
+    ]
+  },
+  {
+    title: "Automatización y Desarrollo",
+    items: ["Python", "Bash", "JavaScript", "Vue.js", "React", "Django", "PostgreSQL", "Elasticsearch"]
+  },
+  {
+    title: "Sistemas y Redes",
+    items: ["Linux (Debian, Ubuntu, Kali)", "Nginx", "HAProxy", "Hardening", "Monitoreo", "Backup y Disaster Recovery"]
+  }
 ];
 
 const projects = [
   {
     featured: true,
-    title: "Landing + SEO técnico",
-    description: "Sitio estático con meta tags, Open Graph, JSON-LD y buenas prácticas de performance.",
-    stack: ["Vue 3", "Vuetify", "SEO"],
+    title: "Sistema nacional de Blacklist para ETECSA",
+    description: "Diseño e implementación de un sistema de clasificación y bloqueo para fortalecer defensa de red a nivel nacional.",
+    stack: ["Ciberseguridad", "Automatización", "Análisis de tráfico"],
+    demo: "",
+    code: ""
+  },
+  {
+    featured: true,
+    title: "Detección de tráfico HTTP/HTTPS anómalo con NLP",
+    description: "Modelo de detección temprana sobre patrones de tráfico para mejorar visibilidad y respuesta frente a amenazas.",
+    stack: ["NLP", "Python", "Ciberseguridad"],
     demo: "",
     code: ""
   },
   {
     featured: false,
-    title: "Dashboard de analítica",
-    description: "UI con componentes reutilizables, estados claros y gráficas integradas.",
-    stack: ["Vue", "Charts", "API"],
+    title: "Automatización de respuestas a incidentes",
+    description: "Flujos automáticos para contención y mitigación en operaciones SOC, reduciendo tiempo de reacción.",
+    stack: ["SOC", "SIEM", "Scripts"],
     demo: "",
     code: ""
   },
   {
     featured: false,
-    title: "Sistema de administración",
-    description: "Panel con roles, CRUD, validaciones y experiencia consistente en desktop y mobile.",
-    stack: ["Vuetify", "Auth", "DX"],
+    title: "Pipelines CI/CD con despliegue seguro",
+    description: "Integración de testing, validaciones y despliegue controlado sobre clústeres Kubernetes en AWS EKS y Alibaba ACK.",
+    stack: ["GitLab CI", "GitHub Actions", "AWS EKS", "Alibaba ACK"],
     demo: "",
     code: ""
   }
+];
+
+const education = [
+  {
+    degree: "Ingeniero en Ciencias Informáticas",
+    institution: "Universidad de las Ciencias Informáticas (UCI)"
+  }
+];
+
+const certifications = [
+  { name: "Forense Digital", issuer: "QAX Qianxin", year: "2024" },
+  { name: "Monitoreo de Redes Inalámbricas", issuer: "QAX Qianxin", year: "2024" },
+  { name: "ISO 9001 (Profundización)", issuer: "Lloyd's Register", year: "2019" }
+];
+
+const languages = ["Español (nativo)", "Inglés técnico (básico)"];
+
+const softSkills = [
+  "Liderazgo técnico y mentoría",
+  "Resolución de problemas críticos",
+  "Comunicación efectiva",
+  "Pensamiento analítico",
+  "Enfoque a resultados"
+];
+
+const profileGoals = [
+  "Aportar valor en equipos multidisciplinarios.",
+  "Impulsar cultura DevSecOps y automatización.",
+  "Mitigar riesgos con enfoque preventivo y medible.",
+  "Operar infraestructuras resilientes y seguras."
 ];
 
 const drawer = ref(false);
@@ -396,4 +657,3 @@ onMounted(() => {
   for (const t of targets) io.observe(t);
 });
 </script>
-
