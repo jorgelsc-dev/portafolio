@@ -546,14 +546,6 @@ const skills = [
 const projects = [
   {
     featured: true,
-    title: "Sistema nacional de Blacklist para ETECSA",
-    description: "Diseño e implementación de un sistema de clasificación y bloqueo para fortalecer defensa de red a nivel nacional.",
-    stack: ["Ciberseguridad", "Automatización", "Análisis de tráfico"],
-    demo: "",
-    code: ""
-  },
-  {
-    featured: true,
     title: "Detección de tráfico HTTP/HTTPS anómalo con NLP",
     description: "Modelo de detección temprana sobre patrones de tráfico para mejorar visibilidad y respuesta frente a amenazas.",
     stack: ["NLP", "Python", "Ciberseguridad"],
