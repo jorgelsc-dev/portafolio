@@ -326,6 +326,7 @@
                 <v-card-text class="prose">
                   <p><strong>Email:</strong> <a :href="'mailto:' + profile.email">{{ profile.email }}</a></p>
                   <p><strong>Teléfono:</strong> <a :href="'tel:' + profile.phoneDial">{{ profile.phone }}</a></p>
+                  <p><strong>WhatsApp:</strong> <a :href="profile.whatsapp" target="_blank" rel="noopener">{{ profile.phone }}</a></p>
                   <p><strong>Ubicación:</strong> {{ profile.location }}</p>
                   <p><strong>Disponibilidad:</strong> {{ profile.availability }}</p>
                   <div class="contact-actions">
@@ -336,6 +337,10 @@
                     <v-btn variant="tonal" rounded="lg" :href="'tel:' + profile.phoneDial">
                       <v-icon start icon="mdi-phone-outline" />
                       Llamar
+                    </v-btn>
+                    <v-btn variant="tonal" rounded="lg" :href="profile.whatsapp" target="_blank" rel="noopener">
+                      <v-icon start icon="mdi-whatsapp" />
+                      WhatsApp
                     </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="profile.github" target="_blank" rel="noopener" :disabled="!profile.github">
                       <v-icon start icon="mdi-github" />
@@ -401,8 +406,9 @@ const profile = {
   availability: "Disponible para trabajo remoto e internacional",
   languagesSummary: "Español nativo / Inglés técnico (básico)",
   email: "jorgeluis961224@gmail.com",
-  phone: "+53 55375310",
+  phone: "+5355375310",
   phoneDial: "+5355375310",
+  whatsapp: "https://wa.me/5355375310",
   github: "https://github.com/jorgelsc-dev",
   linkedin: "https://www.linkedin.com/in/jorgelsc-dev"
 };
