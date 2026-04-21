@@ -109,8 +109,8 @@
           <div class="section-head">
             <h2 class="section-title">Sobre mí</h2>
             <p class="section-desc">
-              Ingeniero en Ciencias Informáticas orientado a ciberseguridad ofensiva/defensiva, automatización y
-              operación segura de infraestructuras críticas.
+              Ingeniero en Ciencias Informáticas y Tech Lead DevSecOps, orientado a automatización, seguridad
+              operativa y entrega confiable sobre AWS, Kubernetes y Linux.
             </p>
           </div>
 
@@ -119,17 +119,17 @@
               <v-card class="glass" rounded="xl" elevation="0">
                 <v-card-text class="prose">
                   <p>
-                    Soy <strong>{{ profile.name }}</strong>, especialista en ciberseguridad, DevOps y arquitectura cloud
-                    con más de 6 años de experiencia. He trabajado en SOC, operaciones Red/Blue Team y despliegue de
-                    plataformas seguras en producción.
+                    Soy <strong>{{ profile.name }}</strong>, Tech Lead y especialista DevSecOps con más de 6 años de
+                    experiencia combinando ciberseguridad, operaciones SOC/CERT y entrega de software.
                   </p>
                   <p>
-                    Mi enfoque combina respuesta a incidentes, hardening, SIEM, automatización con CI/CD y Kubernetes
-                    para reducir riesgos operativos y mejorar continuidad de negocio.
+                    He liderado decisiones técnicas y despliegues en producción sobre AWS, Kubernetes y Linux. Mi
+                    enfoque combina respuesta a incidentes, hardening, SIEM y automatización con CI/CD para reducir
+                    riesgos operativos y mejorar continuidad de negocio.
                   </p>
                   <p>
-                    Busco integrarme en equipos multidisciplinarios donde pueda aportar mediante cultura DevSecOps,
-                    mitigación proactiva y mejora continua.
+                    Busco integrarme en equipos multidisciplinarios donde pueda aportar liderazgo técnico, cultura
+                    DevSecOps y mejora continua.
                   </p>
                 </v-card-text>
               </v-card>
@@ -164,7 +164,7 @@
           <div class="section-head">
             <h2 class="section-title">Experiencia</h2>
             <p class="section-desc">
-              Trayectoria reciente en ciberseguridad, operaciones SOC y plataformas cloud para servicios de misión crítica.
+              Trayectoria reciente como Tech Lead, DevOps y ciberseguridad aplicada a plataformas de misión crítica.
             </p>
           </div>
 
@@ -215,7 +215,7 @@
         <v-container class="py-16">
           <div class="section-head">
             <h2 class="section-title">Proyectos</h2>
-            <p class="section-desc">Casos relevantes en ciberseguridad, analítica y automatización operativa.</p>
+            <p class="section-desc">Proyectos aplicados a ciberseguridad, detección temprana y automatización operativa.</p>
           </div>
 
           <v-row class="mt-8">
@@ -316,7 +316,7 @@
           <div class="section-head">
             <h2 class="section-title">Contacto</h2>
             <p class="section-desc">
-              Si tu organización necesita fortalecer su postura de seguridad y automatizar operación, conversemos.
+              Si tu organización necesita liderazgo técnico, seguridad operativa y despliegues confiables, conversemos.
             </p>
           </div>
 
@@ -400,11 +400,11 @@ const setThemeColorMeta = inject("setThemeColorMeta", () => {});
 const profile = {
   name: "Jorge Luis Sánchez Casanova",
   shortName: "Jorge LSC",
-  kicker: "Especialista en Ciberseguridad | Ingeniero DevOps | Arquitecto Cloud",
-  headline: "Más de 6 años en Red/Blue Team, SOC, DevSecOps y operación multi-cloud sobre AWS y Alibaba Cloud.",
+  kicker: "Tech Lead | DevSecOps",
+  headline: "Más de 6 años combinando ciberseguridad, SOC/CERT, automatización e infraestructura sobre AWS, Kubernetes y Linux.",
   location: "La Habana, Cuba",
   availability: "Disponible para trabajo remoto e internacional",
-  languagesSummary: "Español nativo / Inglés técnico (básico)",
+  languagesSummary: "Español nativo / Inglés técnico funcional",
   email: "jorgeluis961224@gmail.com",
   phone: "+5355375310",
   phoneDial: "+5355375310",
@@ -426,51 +426,63 @@ const nav = [
 const navDesktop = nav.filter((i) => i.id !== "contacto");
 
 const heroBadges = [
-  { icon: "mdi-shield-sword-outline", label: "Red Team / Blue Team" },
+  { icon: "mdi-account-tie-outline", label: "Liderazgo técnico" },
   { icon: "mdi-source-branch", label: "DevSecOps" },
-  { icon: "mdi-cloud-lock-outline", label: "AWS + Alibaba Cloud" }
+  { icon: "mdi-cloud-lock-outline", label: "AWS + Kubernetes" }
 ];
 
-const featuredSkills = ["AWS EKS", "Alibaba ACK", "EC2/ECS", "S3/OSS", "GitLab CI", "Python"];
+const featuredSkills = ["AWS", "Kubernetes", "Docker", "GitLab CI", "GitHub Actions", "Python"];
 
 const operatingModel = [
-  { k: "Enfoque", v: "Seguridad + Automatización" },
-  { k: "Entrega", v: "HA + Continuidad" },
-  { k: "Respuesta", v: "Incidentes críticos" },
-  { k: "Objetivo", v: "Mitigación proactiva" }
+  { k: "Liderazgo", v: "Ejecución técnica" },
+  { k: "Entrega", v: "CI/CD + Continuidad" },
+  { k: "Seguridad", v: "DevSecOps + Hardening" },
+  { k: "Objetivo", v: "Plataformas resilientes" }
 ];
 
 const experience = [
   {
-    role: "Ingeniero DevOps",
-    company: "TECOPOS",
-    period: "Ene 2025 - Actualidad",
+    role: "Tech Lead de Desarrollo y DevOps",
+    company: "Marox",
+    period: "Abr 2025 - Actualidad",
     highlights: [
-      "Administración multi-cloud sobre AWS y Alibaba Cloud en entornos de alta disponibilidad.",
-      "Automatización de despliegues con CI/CD en GitLab CI y GitHub Actions.",
-      "Orquestación de contenedores con Kubernetes (AWS EKS, Alibaba ACK, k3s, Rancher).",
-      "Operación de servicios cloud: EC2/ECS, S3/OSS, VPC, IAM/RAM, RDS, ELB/SLB, CloudWatch/CloudMonitor.",
-      "Optimización de PostgreSQL, HAProxy y Nginx para entornos críticos."
+      "Liderazgo técnico de iniciativas de desarrollo e infraestructura, alineando arquitectura, calidad de entrega y ejecución.",
+      "Definición de estándares para despliegues, automatización, revisión técnica y operación de entornos productivos.",
+      "Trabajo sobre AWS y Kubernetes para construir entornos reproducibles, escalables y estables.",
+      "Acompañamiento al equipo de desarrollo en decisiones técnicas, incidentes complejos y mejora continua del proceso de entrega."
     ]
   },
   {
-    role: "Jefe de Ciberseguridad",
+    role: "Ingeniero DevOps (Part-time)",
+    company: "DiangTech",
+    period: "2025 - Actualidad",
+    highlights: [
+      "Soporte DevOps para proyectos de software con foco en automatización y operación segura de plataformas.",
+      "Implementación y mantenimiento de pipelines CI/CD, contenedorización con Docker y scripting con Python y Bash.",
+      "Administración de servicios sobre Linux, Nginx y PostgreSQL con enfoque en observabilidad y estabilidad.",
+      "Colaboración con equipos de desarrollo para reducir fricción entre código, infraestructura y producción."
+    ]
+  },
+  {
+    role: "Líder de Ciberseguridad",
     company: "Avangenio S.R.L.",
-    period: "Jul 2024",
+    period: "Jul 2024 - Ene 2025",
     highlights: [
-      "Definición y ejecución de estrategia integral de ciberseguridad.",
-      "Auditorías internas y pentesting sobre sistemas de negocio.",
-      "Implementación de controles ISO 27001 y hardening de red."
+      "Creación y desarrollo del área de ciberseguridad de la organización.",
+      "Definición de políticas, controles y prácticas alineadas con ISO 27001.",
+      "Reducción de vulnerabilidades críticas mediante auditorías técnicas, hardening y pruebas de penetración.",
+      "Formación de más de 80 empleados en cultura y buenas prácticas de ciberseguridad."
     ]
   },
   {
-    role: "Especialista Nivel 3 (SOC)",
+    role: "Especialista SOC Nivel 3 y Formador",
     company: "ETECSA",
     period: "Nov 2023 - May 2024",
     highlights: [
-      "Respuesta en tiempo real a incidentes de alta criticidad.",
-      "Despliegue y afinamiento de SIEM con Elastic Stack.",
-      "Operaciones Red Team con explotación controlada e informes técnicos."
+      "Respuesta a incidentes de alta criticidad en infraestructura de telecomunicaciones y servicios esenciales.",
+      "Mitigación de un incidente de ransomware con recuperación operativa total en menos de 72 horas.",
+      "Mejora superior a 3x en detección y reducción de tiempos de respuesta mediante trabajo sobre SIEM.",
+      "Capacitación de especialistas en análisis, respuesta a incidentes y operación SOC."
     ]
   },
   {
@@ -478,76 +490,93 @@ const experience = [
     company: "OSRI CuCERT",
     period: "Ene 2021 - Nov 2023",
     highlights: [
-      "Mitigación de ataques en redes nacionales.",
-      "Monitoreo y análisis de tráfico con Suricata IDS/IPS.",
-      "Mentoría en análisis forense digital y respuesta a incidentes."
+      "Gestión y coordinación de incidentes cibernéticos con organismos nacionales e internacionales.",
+      "Implementación de monitoreo avanzado para protección de infraestructuras críticas.",
+      "Trabajo con IDS/IPS, análisis de tráfico y respuesta operativa frente a amenazas reales.",
+      "Participación en la protección del evento G77 + China mediante monitoreo preventivo y mitigación operativa."
     ]
   }
 ];
 
 const skills = [
   {
-    title: "Ciberseguridad",
-    items: ["Elastic Stack (SIEM)", "Suricata IDS/IPS", "Forense digital", "Pentesting", "Nmap", "Burp Suite", "OWASP ZAP", "Zero Trust"]
-  },
-  {
-    title: "DevOps y Cloud",
+    title: "Dominio principal",
     items: [
-      "AWS EKS",
-      "AWS EC2",
-      "AWS ECS",
-      "AWS ECR",
-      "AWS S3",
-      "AWS IAM",
-      "AWS VPC",
-      "AWS RDS",
-      "AWS ELB/ALB",
-      "AWS Route 53",
-      "AWS CloudWatch",
-      "AWS CloudTrail",
-      "AWS Auto Scaling",
-      "AWS Lambda",
-      "AWS WAF",
-      "AWS KMS",
-      "AWS Systems Manager",
-      "Alibaba ACK",
-      "Alibaba ECS",
-      "Alibaba OSS",
-      "Alibaba Container Registry",
-      "Alibaba RAM",
-      "Alibaba VPC",
-      "Alibaba SLB",
-      "Alibaba RDS",
-      "Alibaba CloudMonitor",
-      "Alibaba ActionTrail",
-      "Alibaba DNS",
-      "Alibaba NAT Gateway",
-      "Alibaba CDN",
-      "Alibaba WAF",
-      "Docker",
+      "AWS",
       "Kubernetes",
-      "k3s",
-      "Rancher",
-      "GitOps",
+      "Docker",
+      "Linux",
       "GitLab CI",
-      "GitHub Actions"
+      "GitHub Actions",
+      "Python",
+      "Bash",
+      "Nginx",
+      "PostgreSQL",
+      "Elastic Stack",
+      "Suricata",
+      "Incident Response",
+      "Hardening"
     ]
   },
   {
-    title: "Automatización y Desarrollo",
-    items: ["Python", "Bash", "JavaScript", "Vue.js", "React", "Django", "PostgreSQL", "Elasticsearch"]
+    title: "Experiencia práctica adicional",
+    items: [
+      "Alibaba Cloud",
+      "k3s",
+      "Rancher",
+      "ECS",
+      "EKS",
+      "EC2",
+      "ECR",
+      "S3",
+      "IAM",
+      "VPC",
+      "RDS",
+      "Route 53",
+      "CloudWatch",
+      "CloudTrail",
+      "Lambda",
+      "WAF",
+      "Alibaba ACK",
+      "OSS",
+      "RAM",
+      "SLB",
+      "CDN",
+      "Alibaba DNS",
+      "NAT Gateway"
+    ]
   },
   {
-    title: "Sistemas y Redes",
-    items: ["Linux (Debian, Ubuntu, Kali)", "Nginx", "HAProxy", "Hardening", "Monitoreo", "Backup y Disaster Recovery"]
+    title: "Desarrollo y scripting",
+    items: ["JavaScript", "Vue.js", "React", "Django", "Automatización de despliegues", "Integración segura", "Troubleshooting"]
+  },
+  {
+    title: "Ciberseguridad aplicada",
+    items: ["Elastic Stack (SIEM)", "Suricata IDS/IPS", "Análisis forense digital", "Pentesting", "Nmap", "Burp Suite", "OWASP ZAP", "Zero Trust"]
   }
 ];
 
 const projects = [
   {
     featured: true,
+    title: "NGIDS",
+    description: "IDS en Python para detección de eventos de seguridad en tiempo real y mejora de visibilidad de red en infraestructura crítica.",
+    stack: ["Python", "IDS", "Ciberseguridad"],
+    demo: "",
+    code: ""
+  },
+  {
+    featured: false,
+    title: "PortHound4",
+    description: "Herramienta de escaneo de red para identificar puertos abiertos, clasificar servicios activos y apoyar discovery técnico.",
+    stack: ["Networking", "Port Scanning", "Seguridad"],
+    demo: "",
+    code: ""
+  },
+  {
+    featured: false,
     title: "Detección de tráfico HTTP/HTTPS anómalo con NLP",
-    description: "Modelo de detección temprana sobre patrones de tráfico para mejorar visibilidad y respuesta frente a amenazas.",
+    description: "Proyecto técnico enfocado en detección temprana de patrones anómalos para mejorar visibilidad y respuesta.",
     stack: ["NLP", "Python", "Ciberseguridad"],
     demo: "",
     code: ""
@@ -555,16 +584,8 @@ const projects = [
   {
     featured: false,
     title: "Automatización de respuestas a incidentes",
-    description: "Flujos automáticos para contención y mitigación en operaciones SOC, reduciendo tiempo de reacción.",
-    stack: ["SOC", "SIEM", "Scripts"],
-    demo: "",
-    code: ""
-  },
-  {
-    featured: false,
-    title: "Pipelines CI/CD con despliegue seguro",
-    description: "Integración de testing, validaciones y despliegue controlado sobre clústeres Kubernetes en AWS EKS y Alibaba ACK.",
-    stack: ["GitLab CI", "GitHub Actions", "AWS EKS", "Alibaba ACK"],
+    description: "Diseño de flujos operativos para acelerar contención y mitigación en escenarios SOC.",
+    stack: ["SOC", "SIEM", "Automatización"],
     demo: "",
     code: ""
   }
@@ -580,10 +601,11 @@ const education = [
 const certifications = [
   { name: "Forense Digital", issuer: "QAX Qianxin", year: "2024" },
   { name: "Monitoreo de Redes Inalámbricas", issuer: "QAX Qianxin", year: "2024" },
+  { name: "Gobernanza y Gestión del Ciberespacio", issuer: "AIBO / Ministerio de Comercio de China", year: "2024" },
   { name: "ISO 9001 (Profundización)", issuer: "Lloyd's Register", year: "2019" }
 ];
 
-const languages = ["Español (nativo)", "Inglés técnico (básico)"];
+const languages = ["Español (nativo)", "Inglés técnico funcional"];
 
 const softSkills = [
   "Liderazgo técnico y mentoría",
@@ -594,10 +616,10 @@ const softSkills = [
 ];
 
 const profileGoals = [
-  "Aportar valor en equipos multidisciplinarios.",
-  "Impulsar cultura DevSecOps y automatización.",
-  "Mitigar riesgos con enfoque preventivo y medible.",
-  "Operar infraestructuras resilientes y seguras."
+  "Liderar iniciativas que unan entrega, seguridad y operación.",
+  "Escalar cultura DevSecOps en equipos de desarrollo.",
+  "Reducir riesgo operativo con automatización y observabilidad.",
+  "Construir plataformas resilientes, seguras y mantenibles."
 ];
 
 const drawer = ref(false);
