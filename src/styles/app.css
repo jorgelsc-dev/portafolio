@@ -306,6 +306,26 @@ body::after {
   max-width: 76ch;
 }
 
+.section-subhead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-subtitle {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.section-mini-desc {
+  margin: 0;
+  color: var(--text-subtle);
+  max-width: 70ch;
+}
+
 .glass {
   background: linear-gradient(180deg, var(--surface-strong), var(--surface-soft)) !important;
   border: 1px solid var(--stroke);
@@ -472,6 +492,39 @@ body::after {
   margin: 0;
   color: var(--text-body);
   line-height: 1.6;
+}
+
+.project-meta {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-subtle);
+}
+
+.project-install {
+  margin: 0 0 12px;
+}
+
+.project-install code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  padding: 0.2em 0.45em;
+  border-radius: 8px;
+  border: 1px solid var(--hint-code-border);
+  background: var(--hint-code-bg);
+}
+
+.project-list {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: var(--text-soft);
+}
+
+.project-actions {
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .project-note {

@@ -214,11 +214,54 @@
       <section id="proyectos" class="section" aria-label="Proyectos">
         <v-container class="py-16">
           <div class="section-head">
-            <h2 class="section-title">Proyectos</h2>
-            <p class="section-desc">Proyectos aplicados a ciberseguridad, detección temprana y automatización operativa.</p>
+            <h2 class="section-title">Proyectos y paquetes</h2>
+            <p class="section-desc">
+              Paquetes publicados en PyPI y proyectos aplicados a ciberseguridad, detección temprana y automatización operativa.
+            </p>
           </div>
 
-          <v-row class="mt-8">
+          <div class="section-subhead mt-8">
+            <h3 class="section-subtitle">Paquetes en PyPI</h3>
+            <p class="section-mini-desc">Publicaciones activas con versión, requisitos, instalación y enlaces oficiales.</p>
+          </div>
+
+          <v-row class="mt-4">
+            <v-col cols="12" md="6" v-for="pkg in pypiPackages" :key="pkg.title">
+              <v-card class="glass project" rounded="xl" elevation="0">
+                <div class="project-top">
+                  <div class="project-badge">{{ pkg.badge }}</div>
+                  <h3 class="project-title">{{ pkg.title }}</h3>
+                  <p class="project-desc">{{ pkg.description }}</p>
+                  <p class="project-meta">{{ pkg.release }}</p>
+                </div>
+                <v-card-text>
+                  <p class="project-install"><code>{{ pkg.install }}</code></p>
+                  <ul class="project-list">
+                    <li v-for="point in pkg.highlights" :key="point">{{ point }}</li>
+                  </ul>
+                  <div class="chips">
+                    <v-chip v-for="t in pkg.stack" :key="t" size="small" variant="tonal" color="secondary" class="ma-1">
+                      {{ t }}
+                    </v-chip>
+                  </div>
+                </v-card-text>
+                <v-card-actions class="px-4 pb-4 project-actions">
+                  <v-btn :href="pkg.pypi" target="_blank" rel="noopener" variant="tonal" color="primary">PyPI</v-btn>
+                  <v-btn v-if="pkg.docs" :href="pkg.docs" target="_blank" rel="noopener" variant="text">Docs</v-btn>
+                  <v-btn v-if="pkg.code" :href="pkg.code" target="_blank" rel="noopener" variant="text">Repositorio</v-btn>
+                  <v-btn v-if="pkg.issues" :href="pkg.issues" target="_blank" rel="noopener" variant="text">Issues</v-btn>
+                  <v-btn v-if="pkg.changelog" :href="pkg.changelog" target="_blank" rel="noopener" variant="text">Changelog</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <div class="section-subhead mt-10">
+            <h3 class="section-subtitle">Otros proyectos aplicados</h3>
+            <p class="section-mini-desc">Implementaciones orientadas a detección, análisis y respuesta en entornos reales.</p>
+          </div>
+
+          <v-row class="mt-4">
             <v-col cols="12" md="6" v-for="p in projects" :key="p.title">
               <v-card class="glass project" rounded="xl" elevation="0">
                 <div class="project-top">
@@ -429,7 +472,8 @@ const navDesktop = nav.filter((i) => i.id !== "contacto");
 const heroBadges = [
   { icon: "$accountTieOutline", label: "Liderazgo técnico" },
   { icon: "$sourceBranch", label: "DevSecOps" },
-  { icon: "$cloudLockOutline", label: "AWS + Kubernetes" }
+  { icon: "$cloudLockOutline", label: "AWS + Kubernetes" },
+  { icon: "$checkCircleOutline", label: "2 paquetes en PyPI" }
 ];
 
 const featuredSkills = ["AWS", "Kubernetes", "Docker", "GitLab CI", "GitHub Actions", "Python"];
@@ -557,20 +601,51 @@ const skills = [
   }
 ];
 
+const pypiPackages = [
+  {
+    badge: "PyPI · Destacado",
+    title: "porthound4",
+    description: "Escáner de red de nueva generación construido sobre wsbuilder para auditorías autorizadas en modo standalone.",
+    release: "v0.2.1 · Publicado el 28 de mayo de 2026 · Python >=3.12 · Licencia MIT",
+    install: "python -m pip install porthound4",
+    highlights: [
+      "Escaneo TCP, UDP, ICMP y SCTP con banner grabbing por servicio.",
+      "API HTTP y WebSocket para gestionar escaneos y estado operativo local.",
+      "Persistencia SQLite y documentación pública para despliegue y operación."
+    ],
+    stack: ["Python", "Network Scanner", "TCP/UDP/ICMP/SCTP", "WebSocket", "SQLite", "PyPI"],
+    pypi: "https://pypi.org/project/porthound4/",
+    docs: "https://porthound.jorgelsc.dev",
+    code: "https://github.com/jorgelsc-dev/porthound",
+    issues: "https://github.com/jorgelsc-dev/porthound/issues",
+    changelog: "https://github.com/jorgelsc-dev/porthound/blob/main/CHANGELOG.md"
+  },
+  {
+    badge: "PyPI",
+    title: "wsbuilder",
+    description: "Framework ligero de infraestructura para servicios HTTP + WebSocket, base tecnológica de porthound4.",
+    release: "v0.18.0 · Publicado el 27 de mayo de 2026 · Python >=3.11 · Licencia MIT",
+    install: "python -m pip install wsbuilder",
+    highlights: [
+      "Routing HTTP tipado y WebSocket de bajo nivel con control de frames.",
+      "Incluye ORM ligero SQLite, cache, seguridad, métricas y tareas en background.",
+      "Diseñado para activar módulos de forma composable según necesidad operativa."
+    ],
+    stack: ["Python", "HTTP", "WebSocket", "SQLite ORM", "Security", "Metrics", "PyPI"],
+    pypi: "https://pypi.org/project/wsbuilder/",
+    docs: "",
+    code: "",
+    issues: "",
+    changelog: ""
+  }
+];
+
 const projects = [
   {
     featured: true,
     title: "NGIDS",
     description: "IDS en Python para detección de eventos de seguridad en tiempo real y mejora de visibilidad de red en infraestructura crítica.",
     stack: ["Python", "IDS", "Ciberseguridad"],
-    demo: "",
-    code: ""
-  },
-  {
-    featured: false,
-    title: "PortHound4",
-    description: "Herramienta de escaneo de red para identificar puertos abiertos, clasificar servicios activos y apoyar discovery técnico.",
-    stack: ["Networking", "Port Scanning", "Seguridad"],
     demo: "",
     code: ""
   },
