@@ -1,11 +1,32 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import "./styles/app.css";
 
 import { createVuetify } from "vuetify";
+import { mdi } from "vuetify/iconsets/mdi-svg";
+import {
+  mdiAccountTieOutline,
+  mdiArrowRight,
+  mdiBriefcaseCheckOutline,
+  mdiCheckCircleOutline,
+  mdiClose,
+  mdiCloudLockOutline,
+  mdiContentCopy,
+  mdiEmailOutline,
+  mdiGithub,
+  mdiLinkedin,
+  mdiMapMarker,
+  mdiMenu,
+  mdiMoonWaningCrescent,
+  mdiPhoneOutline,
+  mdiSchoolOutline,
+  mdiSourceBranch,
+  mdiTranslate,
+  mdiWeatherSunny,
+  mdiWhatsapp
+} from "@mdi/js";
 
 const STORAGE_THEME_KEY = "jorgelsc:theme";
 
@@ -34,6 +55,28 @@ function setDocumentTheme(themeName) {
 const initialThemeName = getInitialThemeName();
 setThemeColorMeta(initialThemeName);
 setDocumentTheme(initialThemeName);
+
+const customIconAliases = {
+  accountTieOutline: mdiAccountTieOutline,
+  arrowRight: mdiArrowRight,
+  briefcaseCheckOutline: mdiBriefcaseCheckOutline,
+  checkCircleOutline: mdiCheckCircleOutline,
+  close: mdiClose,
+  cloudLockOutline: mdiCloudLockOutline,
+  contentCopy: mdiContentCopy,
+  emailOutline: mdiEmailOutline,
+  github: mdiGithub,
+  linkedin: mdiLinkedin,
+  mapMarker: mdiMapMarker,
+  menu: mdiMenu,
+  moonWaningCrescent: mdiMoonWaningCrescent,
+  phoneOutline: mdiPhoneOutline,
+  schoolOutline: mdiSchoolOutline,
+  sourceBranch: mdiSourceBranch,
+  translate: mdiTranslate,
+  weatherSunny: mdiWeatherSunny,
+  whatsapp: mdiWhatsapp
+};
 
 const vuetify = createVuetify({
   theme: {
@@ -68,7 +111,11 @@ const vuetify = createVuetify({
     }
   },
   icons: {
-    defaultSet: "mdi"
+    defaultSet: "mdi",
+    aliases: customIconAliases,
+    sets: {
+      mdi
+    }
   }
 });
 

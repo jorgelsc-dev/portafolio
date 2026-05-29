@@ -27,7 +27,7 @@
             :aria-label="isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
             @click="toggleTheme"
           >
-            <v-icon :icon="isDark ? 'mdi-weather-sunny' : 'mdi-moon-waning-crescent'" />
+            <v-icon :icon="isDark ? '$weatherSunny' : '$moonWaningCrescent'" />
           </v-btn>
           <v-btn class="cta-btn" color="primary" variant="flat" rounded="lg" @click="scrollTo('contacto')">
             Contacto
@@ -36,7 +36,7 @@
 
         <div class="nav-mobile">
           <v-btn icon variant="text" :aria-label="drawer ? 'Cerrar menú' : 'Abrir menú'" @click="drawer = !drawer">
-            <v-icon :icon="drawer ? 'mdi-close' : 'mdi-menu'" />
+            <v-icon :icon="drawer ? '$close' : '$menu'" />
           </v-btn>
         </div>
       </v-container>
@@ -48,7 +48,7 @@
         <v-divider class="my-2" />
         <v-list-item title="Cambiar tema" @click="toggleTheme">
           <template #prepend>
-            <v-icon :icon="isDark ? 'mdi-weather-sunny' : 'mdi-moon-waning-crescent'" />
+            <v-icon :icon="isDark ? '$weatherSunny' : '$moonWaningCrescent'" />
           </template>
         </v-list-item>
       </v-list>
@@ -68,7 +68,7 @@
               <div class="hero-actions">
                 <v-btn color="primary" variant="flat" rounded="lg" size="large" @click="scrollTo('experiencia')">
                   Ver experiencia
-                  <v-icon end icon="mdi-arrow-right" />
+                  <v-icon end icon="$arrowRight" />
                 </v-btn>
                 <v-btn variant="tonal" rounded="lg" size="large" @click="scrollTo('sobre-mi')">Sobre mí</v-btn>
               </div>
@@ -140,14 +140,14 @@
                 <v-card-title class="text-h6">Detalles rápidos</v-card-title>
                 <v-card-text>
                   <ul class="facts">
-                    <li><v-icon icon="mdi-map-marker" size="18" /><span>{{ profile.location }}</span></li>
-                    <li><v-icon icon="mdi-translate" size="18" /><span>{{ profile.languagesSummary }}</span></li>
-                    <li><v-icon icon="mdi-briefcase-check-outline" size="18" /><span>{{ profile.availability }}</span></li>
+                    <li><v-icon icon="$mapMarker" size="18" /><span>{{ profile.location }}</span></li>
+                    <li><v-icon icon="$translate" size="18" /><span>{{ profile.languagesSummary }}</span></li>
+                    <li><v-icon icon="$briefcaseCheckOutline" size="18" /><span>{{ profile.availability }}</span></li>
                   </ul>
 
                   <div class="mt-4">
                     <v-btn variant="tonal" color="primary" rounded="lg" @click="copyEmail">
-                      <v-icon start icon="mdi-content-copy" />
+                      <v-icon start icon="$contentCopy" />
                       Copiar email
                     </v-btn>
                     <p class="hint" v-if="copied">Copiado.</p>
@@ -260,7 +260,7 @@
                 <v-card-text>
                   <ul class="facts">
                     <li v-for="item in education" :key="item.degree">
-                      <v-icon icon="mdi-school-outline" size="18" />
+                      <v-icon icon="$schoolOutline" size="18" />
                       <span><strong>{{ item.degree }}</strong><br />{{ item.institution }}</span>
                     </li>
                   </ul>
@@ -331,19 +331,19 @@
                   <p><strong>Disponibilidad:</strong> {{ profile.availability }}</p>
                   <div class="contact-actions">
                     <v-btn color="primary" variant="flat" rounded="lg" :href="'mailto:' + profile.email">
-                      <v-icon start icon="mdi-email-outline" />
+                      <v-icon start icon="$emailOutline" />
                       Enviar email
                     </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="'tel:' + profile.phoneDial">
-                      <v-icon start icon="mdi-phone-outline" />
+                      <v-icon start icon="$phoneOutline" />
                       Llamar
                     </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="profile.whatsapp" target="_blank" rel="noopener">
-                      <v-icon start icon="mdi-whatsapp" />
+                      <v-icon start icon="$whatsapp" />
                       WhatsApp
                     </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="profile.github" target="_blank" rel="noopener" :disabled="!profile.github">
-                      <v-icon start icon="mdi-github" />
+                      <v-icon start icon="$github" />
                       GitHub
                     </v-btn>
                     <v-btn
@@ -354,7 +354,7 @@
                       rel="noopener"
                       :disabled="!profile.linkedin"
                     >
-                      <v-icon start icon="mdi-linkedin" />
+                      <v-icon start icon="$linkedin" />
                       LinkedIn
                     </v-btn>
                   </div>
@@ -368,7 +368,7 @@
                 <v-card-text>
                   <ul class="facts">
                     <li v-for="goal in profileGoals" :key="goal">
-                      <v-icon icon="mdi-check-circle-outline" size="18" />
+                      <v-icon icon="$checkCircleOutline" size="18" />
                       <span>{{ goal }}</span>
                     </li>
                   </ul>
@@ -427,9 +427,9 @@ const nav = [
 const navDesktop = nav.filter((i) => i.id !== "contacto");
 
 const heroBadges = [
-  { icon: "mdi-account-tie-outline", label: "Liderazgo técnico" },
-  { icon: "mdi-source-branch", label: "DevSecOps" },
-  { icon: "mdi-cloud-lock-outline", label: "AWS + Kubernetes" }
+  { icon: "$accountTieOutline", label: "Liderazgo técnico" },
+  { icon: "$sourceBranch", label: "DevSecOps" },
+  { icon: "$cloudLockOutline", label: "AWS + Kubernetes" }
 ];
 
 const featuredSkills = ["AWS", "Kubernetes", "Docker", "GitLab CI", "GitHub Actions", "Python"];
