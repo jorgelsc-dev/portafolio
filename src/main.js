@@ -21,7 +21,7 @@ function getInitialThemeName() {
 }
 
 function setThemeColorMeta(themeName) {
-  const meta = document.querySelector('meta[name="theme-color"]');
+  const meta = document.querySelector('meta[name="theme-color"][data-theme-color="dynamic"]');
   if (!meta) return;
   meta.setAttribute("content", themeName === "light" ? "#F4F7FB" : "#070A12");
 }

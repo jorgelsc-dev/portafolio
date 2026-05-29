@@ -18,7 +18,7 @@
     <link rel="alternate" hreflang="x-default" href="https://jorgelsc.dev/" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F7FB" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070A12" />
-    <meta name="theme-color" content="#070A12" />
+    <meta name="theme-color" content="#070A12" data-theme-color="dynamic" />
     <meta name="color-scheme" content="light dark" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -38,7 +38,7 @@
         }
         document.documentElement.setAttribute("data-theme", theme);
         document.documentElement.style.colorScheme = theme;
-        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        var metaTheme = document.querySelector('meta[name="theme-color"][data-theme-color="dynamic"]');
         if (metaTheme) metaTheme.setAttribute("content", theme === "light" ? "#F4F7FB" : "#070A12");
       })();
     </script>
@@ -106,8 +106,8 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-DS0HOHmR.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cr0TXm2u.css">
+    <script type="module" crossorigin src="/assets/index-C5gx4f6m.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-8gz3G0zS.css">
   </head>
 
   <body>
