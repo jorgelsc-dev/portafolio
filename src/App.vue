@@ -396,6 +396,7 @@ import { useTheme } from "vuetify";
 
 const STORAGE_THEME_KEY = inject("storageThemeKey", "jorgelsc:theme");
 const setThemeColorMeta = inject("setThemeColorMeta", () => {});
+const setDocumentTheme = inject("setDocumentTheme", () => {});
 
 const profile = {
   name: "Jorge Luis Sánchez Casanova",
@@ -657,7 +658,12 @@ const isDark = computed(() => theme.global.current.value.dark);
 function toggleTheme() {
   const next = isDark.value ? "light" : "dark";
   theme.global.name.value = next;
-  localStorage.setItem(STORAGE_THEME_KEY, next);
+  try {
+    localStorage.setItem(STORAGE_THEME_KEY, next);
+  } catch {
+    // Ignore storage write errors (e.g. private mode restrictions).
+  }
+  setDocumentTheme(next);
   setThemeColorMeta(next);
 }
 

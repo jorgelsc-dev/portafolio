@@ -14,8 +14,32 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://jorgelsc.dev/" />
+    <link rel="alternate" hreflang="es" href="https://jorgelsc.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://jorgelsc.dev/" />
     <meta name="theme-color" content="#070A12" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <script>
+      (function () {
+        var STORAGE_THEME_KEY = "jorgelsc:theme";
+        var theme = "dark";
+        try {
+          var saved = localStorage.getItem(STORAGE_THEME_KEY);
+          if (saved === "light" || saved === "dark") {
+            theme = saved;
+          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+            theme = "light";
+          }
+        } catch (_) {
+          // Ignore storage issues and keep fallback theme.
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.setAttribute("content", theme === "light" ? "#F4F7FB" : "#070A12");
+      })();
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Jorge LSC | Tech Lead DevSecOps" />
@@ -30,7 +54,7 @@
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content="es_CU" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Jorge Luis Sánchez Casanova | Tech Lead y DevSecOps" />
@@ -64,7 +88,18 @@
             "name": "Jorge Luis Sánchez Casanova",
             "url": "https://jorgelsc.dev/",
             "image": "https://jorgelsc.dev/og.png",
-            "jobTitle": "Tech Lead y especialista DevSecOps"
+            "jobTitle": "Tech Lead y especialista DevSecOps",
+            "sameAs": ["https://github.com/jorgelsc-dev", "https://www.linkedin.com/in/jorgelsc-dev"],
+            "knowsAbout": [
+              "DevSecOps",
+              "AWS",
+              "Kubernetes",
+              "Ciberseguridad",
+              "SOC/CERT",
+              "SIEM",
+              "CI/CD",
+              "Linux"
+            ]
           }
         ]
       }
@@ -72,6 +107,24 @@
   </head>
 
   <body>
+    <noscript>
+      <div
+        style="
+          max-width: 880px;
+          margin: 18px auto;
+          padding: 14px 16px;
+          border-radius: 14px;
+          border: 1px solid rgba(15, 23, 42, 0.16);
+          background: #f8fafc;
+          color: #0f172a;
+          font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+          line-height: 1.5;
+        "
+      >
+        Este sitio usa JavaScript para la navegación. Si no puedes activarlo, contáctame en
+        <a href="mailto:jorgeluis961224@gmail.com">jorgeluis961224@gmail.com</a>.
+      </div>
+    </noscript>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

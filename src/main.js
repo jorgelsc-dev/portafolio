@@ -10,8 +10,12 @@ import { createVuetify } from "vuetify";
 const STORAGE_THEME_KEY = "jorgelsc:theme";
 
 function getInitialThemeName() {
-  const saved = localStorage.getItem(STORAGE_THEME_KEY);
-  if (saved === "light" || saved === "dark") return saved;
+  try {
+    const saved = localStorage.getItem(STORAGE_THEME_KEY);
+    if (saved === "light" || saved === "dark") return saved;
+  } catch {
+    // Ignore storage access errors and fall back to system preference.
+  }
   const prefersLight = Boolean(window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches);
   return prefersLight ? "light" : "dark";
 }
@@ -19,11 +23,17 @@ function getInitialThemeName() {
 function setThemeColorMeta(themeName) {
   const meta = document.querySelector('meta[name="theme-color"]');
   if (!meta) return;
-  meta.setAttribute("content", themeName === "light" ? "#F7F8FA" : "#070A12");
+  meta.setAttribute("content", themeName === "light" ? "#F4F7FB" : "#070A12");
+}
+
+function setDocumentTheme(themeName) {
+  document.documentElement.setAttribute("data-theme", themeName);
+  document.documentElement.style.colorScheme = themeName;
 }
 
 const initialThemeName = getInitialThemeName();
 setThemeColorMeta(initialThemeName);
+setDocumentTheme(initialThemeName);
 
 const vuetify = createVuetify({
   theme: {
@@ -65,5 +75,6 @@ const vuetify = createVuetify({
 createApp(App)
   .provide("storageThemeKey", STORAGE_THEME_KEY)
   .provide("setThemeColorMeta", setThemeColorMeta)
+  .provide("setDocumentTheme", setDocumentTheme)
   .use(vuetify)
   .mount("#app");
