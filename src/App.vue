@@ -59,7 +59,7 @@
         <div class="hero-bg" aria-hidden="true" />
 
         <v-container class="py-16">
-          <v-row align="center">
+          <v-row align="center" class="hero-layout">
             <v-col cols="12" md="7">
               <p class="eyebrow">{{ profile.kicker }}</p>
               <h1 class="hero-title">{{ profile.name }}</h1>
@@ -70,7 +70,13 @@
                   Ver experiencia
                   <v-icon end icon="$arrowRight" />
                 </v-btn>
-                <v-btn variant="tonal" rounded="lg" size="large" @click="scrollTo('sobre-mi')">Sobre mí</v-btn>
+                <v-btn variant="tonal" rounded="lg" size="large" :href="profile.cvDevOpsEs" target="_blank" rel="noopener">
+                  <v-icon start icon="$fileDocumentOutline" />
+                  CV DevOps ES
+                </v-btn>
+                <v-btn variant="text" rounded="lg" size="large" :href="profile.cvDevOpsPt" target="_blank" rel="noopener">
+                  CV DevOps PT
+                </v-btn>
               </div>
 
               <div class="hero-badges" aria-label="Especialidades">
@@ -82,9 +88,23 @@
             </v-col>
 
             <v-col cols="12" md="5">
-              <v-card class="glass" rounded="xl" elevation="0">
-                <v-card-title class="text-h6">Stack principal</v-card-title>
+              <v-card class="glass profile-panel" rounded="xl" elevation="0">
+                <div class="portrait-wrap">
+                  <img class="portrait" :src="profile.photo" :alt="`Foto profesional de ${profile.name}`" />
+                  <div>
+                    <p class="portrait-kicker">Disponible remoto / internacional</p>
+                    <p class="portrait-title">Tech Lead DevSecOps</p>
+                  </div>
+                </div>
+                <v-card-title class="text-h6">Perfil ejecutivo</v-card-title>
                 <v-card-text>
+                  <div class="impact-strip" aria-label="Logros destacados">
+                    <div v-for="item in impactMetrics" :key="item.value" class="impact-item">
+                      <strong>{{ item.value }}</strong>
+                      <span>{{ item.label }}</span>
+                    </div>
+                  </div>
+
                   <div class="chips" aria-label="Tecnologías destacadas">
                     <v-chip v-for="s in featuredSkills" :key="s" color="secondary" variant="tonal" class="ma-1">
                       {{ s }}
@@ -109,8 +129,8 @@
           <div class="section-head">
             <h2 class="section-title">Sobre mí</h2>
             <p class="section-desc">
-              Ingeniero en Ciencias Informáticas y Tech Lead DevSecOps, orientado a automatización, seguridad
-              operativa y entrega confiable sobre AWS, Kubernetes y Linux.
+              Ingeniero en Ciencias Informáticas con una combinación fuerte de liderazgo técnico, seguridad ofensiva y defensiva,
+              operaciones SOC/CERT y entrega de plataformas en producción.
             </p>
           </div>
 
@@ -119,8 +139,8 @@
               <v-card class="glass" rounded="xl" elevation="0">
                 <v-card-text class="prose">
                   <p>
-                    Soy <strong>{{ profile.name }}</strong>, Tech Lead y especialista DevSecOps con más de 6 años de
-                    experiencia combinando ciberseguridad, operaciones SOC/CERT y entrega de software.
+                    Soy <strong>{{ profile.name }}</strong>, Tech Lead y DevSecOps con más de 6 años uniendo
+                    ciberseguridad, automatización de infraestructura y entrega de software.
                   </p>
                   <p>
                     He liderado decisiones técnicas y despliegues en producción sobre AWS, Kubernetes y Linux. Mi
@@ -143,6 +163,7 @@
                     <li><v-icon icon="$mapMarker" size="18" /><span>{{ profile.location }}</span></li>
                     <li><v-icon icon="$translate" size="18" /><span>{{ profile.languagesSummary }}</span></li>
                     <li><v-icon icon="$briefcaseCheckOutline" size="18" /><span>{{ profile.availability }}</span></li>
+                    <li><v-icon icon="$airplaneTakeoff" size="18" /><span>{{ profile.relocation }}</span></li>
                   </ul>
 
                   <div class="mt-4">
@@ -187,6 +208,29 @@
         </v-container>
       </section>
 
+      <section id="logros" class="section" aria-label="Logros medibles">
+        <v-container class="py-16">
+          <div class="section-head">
+            <h2 class="section-title">Logros medibles</h2>
+            <p class="section-desc">
+              Señales concretas para reclutadores, ATS y evaluadores técnicos: impacto operativo, seguridad y liderazgo.
+            </p>
+          </div>
+
+          <v-row class="mt-8" align="stretch">
+            <v-col cols="12" sm="6" lg="3" v-for="item in achievementCards" :key="item.title">
+              <v-card class="glass achievement-card" rounded="xl" elevation="0">
+                <v-card-text>
+                  <p class="achievement-value">{{ item.value }}</p>
+                  <h3 class="achievement-title">{{ item.title }}</h3>
+                  <p class="achievement-desc">{{ item.description }}</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
       <section id="skills" class="section" aria-label="Skills">
         <v-container class="py-16">
           <div class="section-head">
@@ -203,6 +247,37 @@
                     <v-chip v-for="item in group.items" :key="item" variant="tonal" color="primary" class="ma-1">
                       {{ item }}
                     </v-chip>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="cv" class="section" aria-label="Curriculum Vitae">
+        <v-container class="py-16">
+          <div class="section-head">
+            <h2 class="section-title">CV por objetivo</h2>
+            <p class="section-desc">
+              Versiones listas para ATS, reclutamiento internacional y lectura ejecutiva en español y portugués de Brasil.
+            </p>
+          </div>
+
+          <v-row class="mt-8" align="stretch">
+            <v-col cols="12" sm="6" lg="3" v-for="cv in cvDownloads" :key="cv.title">
+              <v-card class="glass cv-card" rounded="xl" elevation="0">
+                <v-card-text>
+                  <p class="cv-tag">{{ cv.tag }}</p>
+                  <h3 class="cv-title">{{ cv.title }}</h3>
+                  <p class="cv-desc">{{ cv.description }}</p>
+                  <div class="cv-actions">
+                    <v-btn :href="cv.es" target="_blank" rel="noopener" color="primary" variant="tonal" rounded="lg" size="small">
+                      ES
+                    </v-btn>
+                    <v-btn :href="cv.pt" target="_blank" rel="noopener" variant="text" rounded="lg" size="small">
+                      PT-BR
+                    </v-btn>
                   </div>
                 </v-card-text>
               </v-card>
@@ -377,6 +452,10 @@
                       <v-icon start icon="$emailOutline" />
                       Enviar email
                     </v-btn>
+                    <v-btn variant="tonal" rounded="lg" :href="profile.cvVisualEs" target="_blank" rel="noopener">
+                      <v-icon start icon="$fileDocumentOutline" />
+                      Descargar CV
+                    </v-btn>
                     <v-btn variant="tonal" rounded="lg" :href="'tel:' + profile.phoneDial">
                       <v-icon start icon="$phoneOutline" />
                       Llamar
@@ -448,20 +527,32 @@ const profile = {
   headline: "Más de 6 años combinando ciberseguridad, SOC/CERT, automatización e infraestructura sobre AWS, Kubernetes y Linux.",
   location: "La Habana, Cuba",
   availability: "Disponible para trabajo remoto e internacional",
+  relocation: "Abierto a reubicación",
   languagesSummary: "Español nativo / Inglés técnico funcional",
   email: "jorgeluis961224@gmail.com",
   phone: "+5355375310",
   phoneDial: "+5355375310",
   whatsapp: "https://wa.me/5355375310",
   github: "https://github.com/jorgelsc-dev",
-  linkedin: "https://www.linkedin.com/in/jorgelsc-dev"
+  linkedin: "https://www.linkedin.com/in/jorgelsc-dev",
+  photo: "/jorge-luis-profile.png",
+  cvDevOpsEs: "/CV-Jorge-Luis-DevOps-ATS-ES.pdf",
+  cvDevOpsPt: "/CV-Jorge-Luis-DevOps-ATS-PT-BR.pdf",
+  cvSecurityEs: "/CV-Jorge-Luis-Ciberseguridad-ATS-ES.pdf",
+  cvSecurityPt: "/CV-Jorge-Luis-Ciberseguranca-ATS-PT-BR.pdf",
+  cvVisualEs: "/CV-Jorge-Luis-Visual-ES.pdf",
+  cvVisualPt: "/CV-Jorge-Luis-Visual-PT-BR.pdf",
+  cvLiteEs: "/CV-Jorge-Luis-Lite-ES.pdf",
+  cvLitePt: "/CV-Jorge-Luis-lite.pdf"
 };
 
 const nav = [
   { id: "inicio", label: "Inicio" },
   { id: "sobre-mi", label: "Sobre mí" },
   { id: "experiencia", label: "Experiencia" },
+  { id: "logros", label: "Logros" },
   { id: "skills", label: "Skills" },
+  { id: "cv", label: "CV" },
   { id: "proyectos", label: "Proyectos" },
   { id: "formacion", label: "Formación" },
   { id: "contacto", label: "Contacto" }
@@ -473,10 +564,17 @@ const heroBadges = [
   { icon: "$accountTieOutline", label: "Liderazgo técnico" },
   { icon: "$sourceBranch", label: "DevSecOps" },
   { icon: "$cloudLockOutline", label: "AWS + Kubernetes" },
-  { icon: "$checkCircleOutline", label: "2 paquetes en PyPI" }
+  { icon: "$checkCircleOutline", label: "Impacto medible" }
 ];
 
 const featuredSkills = ["AWS", "Kubernetes", "Docker", "GitLab CI", "GitHub Actions", "Python"];
+
+const impactMetrics = [
+  { value: "6+ años", label: "seguridad, DevOps y software" },
+  { value: "<72 h", label: "recuperación ante ransomware" },
+  { value: "3x+", label: "mejora en detección SIEM" },
+  { value: "80+", label: "personas formadas en seguridad" }
+];
 
 const operatingModel = [
   { k: "Liderazgo", v: "Ejecución técnica" },
@@ -540,6 +638,60 @@ const experience = [
       "Trabajo con IDS/IPS, análisis de tráfico y respuesta operativa frente a amenazas reales.",
       "Participación en la protección del evento G77 + China mediante monitoreo preventivo y mitigación operativa."
     ]
+  }
+];
+
+const achievementCards = [
+  {
+    value: "<72 h",
+    title: "Continuidad operativa",
+    description: "Recuperación total de un incidente de ransomware en infraestructura crítica."
+  },
+  {
+    value: "3x+",
+    title: "Detección de amenazas",
+    description: "Afinamiento e integración de SIEM para elevar capacidad de detección y respuesta."
+  },
+  {
+    value: "80+",
+    title: "Cultura de seguridad",
+    description: "Formación de colaboradores y especialistas en buenas prácticas, SOC e incident response."
+  },
+  {
+    value: "ISO 27001",
+    title: "Gobernanza",
+    description: "Creación de controles y prácticas para un área de ciberseguridad desde cero."
+  }
+];
+
+const cvDownloads = [
+  {
+    tag: "ATS",
+    title: "DevOps Engineer",
+    description: "Versión enfocada en AWS, Kubernetes, CI/CD, Linux, automatización y operación de plataformas.",
+    es: profile.cvDevOpsEs,
+    pt: profile.cvDevOpsPt
+  },
+  {
+    tag: "ATS",
+    title: "Ciberseguridad",
+    description: "Versión para SOC/CERT, SIEM, hardening, respuesta a incidentes, auditoría y gobernanza.",
+    es: profile.cvSecurityEs,
+    pt: profile.cvSecurityPt
+  },
+  {
+    tag: "Visual",
+    title: "Presentación ejecutiva",
+    description: "Versión con foto y diseño más humano para envío directo a reclutadores y networking.",
+    es: profile.cvVisualEs,
+    pt: profile.cvVisualPt
+  },
+  {
+    tag: "Lite",
+    title: "Resumen rápido",
+    description: "Versión ligera para compartir cuando se necesita una lectura breve y directa.",
+    es: profile.cvLiteEs,
+    pt: profile.cvLitePt
   }
 ];
 

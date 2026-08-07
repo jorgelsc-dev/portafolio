@@ -1,6 +1,7 @@
 {
-  "name": "Jorge LSC | Ciberseguridad y DevOps",
+  "name": "Jorge Luis Sanchez Casanova | Tech Lead DevSecOps",
   "short_name": "Jorge LSC",
+  "description": "Portafolio profesional de Tech Lead DevSecOps con experiencia en AWS, Kubernetes, SOC/CERT, SIEM y CI/CD seguro.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070A12",

@@ -8,6 +8,7 @@ import { createVuetify } from "vuetify";
 import { mdi } from "vuetify/iconsets/mdi-svg";
 import {
   mdiAccountTieOutline,
+  mdiAirplaneTakeoff,
   mdiArrowRight,
   mdiBriefcaseCheckOutline,
   mdiCheckCircleOutline,
@@ -15,6 +16,7 @@ import {
   mdiCloudLockOutline,
   mdiContentCopy,
   mdiEmailOutline,
+  mdiFileDocumentOutline,
   mdiGithub,
   mdiLinkedin,
   mdiMapMarker,
@@ -58,6 +60,7 @@ setDocumentTheme(initialThemeName);
 
 const customIconAliases = {
   accountTieOutline: mdiAccountTieOutline,
+  airplaneTakeoff: mdiAirplaneTakeoff,
   arrowRight: mdiArrowRight,
   briefcaseCheckOutline: mdiBriefcaseCheckOutline,
   checkCircleOutline: mdiCheckCircleOutline,
@@ -65,6 +68,7 @@ const customIconAliases = {
   cloudLockOutline: mdiCloudLockOutline,
   contentCopy: mdiContentCopy,
   emailOutline: mdiEmailOutline,
+  fileDocumentOutline: mdiFileDocumentOutline,
   github: mdiGithub,
   linkedin: mdiLinkedin,
   mapMarker: mdiMapMarker,
