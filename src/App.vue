@@ -530,9 +530,9 @@ const profile = {
   relocation: "Abierto a reubicación",
   languagesSummary: "Español nativo / Inglés técnico funcional",
   email: "jorgeluis961224@gmail.com",
-  phone: "+5355375310",
-  phoneDial: "+5355375310",
-  whatsapp: "https://wa.me/5355375310",
+  phone: "+55 41 99228-0044",
+  phoneDial: "+5541992280044",
+  whatsapp: "https://wa.me/5541992280044",
   github: "https://github.com/jorgelsc-dev",
   linkedin: "https://www.linkedin.com/in/jorgelsc-dev",
   photo: "/jorge-luis-profile.png",
@@ -541,9 +541,7 @@ const profile = {
   cvSecurityEs: "/CV-Jorge-Luis-Ciberseguridad-ATS-ES.pdf",
   cvSecurityPt: "/CV-Jorge-Luis-Ciberseguranca-ATS-PT-BR.pdf",
   cvVisualEs: "/CV-Jorge-Luis-Visual-ES.pdf",
-  cvVisualPt: "/CV-Jorge-Luis-Visual-PT-BR.pdf",
-  cvLiteEs: "/CV-Jorge-Luis-Lite-ES.pdf",
-  cvLitePt: "/CV-Jorge-Luis-lite.pdf"
+  cvVisualPt: "/CV-Jorge-Luis-Visual-PT-BR.pdf"
 };
 
 const nav = [
@@ -685,13 +683,6 @@ const cvDownloads = [
     description: "Versión con foto y diseño más humano para envío directo a reclutadores y networking.",
     es: profile.cvVisualEs,
     pt: profile.cvVisualPt
-  },
-  {
-    tag: "Lite",
-    title: "Resumen rápido",
-    description: "Versión ligera para compartir cuando se necesita una lectura breve y directa.",
-    es: profile.cvLiteEs,
-    pt: profile.cvLitePt
   }
 ];
 
@@ -795,14 +786,6 @@ const pypiPackages = [
 const projects = [
   {
     featured: true,
-    title: "NGIDS",
-    description: "IDS en Python para detección de eventos de seguridad en tiempo real y mejora de visibilidad de red en infraestructura crítica.",
-    stack: ["Python", "IDS", "Ciberseguridad"],
-    demo: "",
-    code: ""
-  },
-  {
-    featured: false,
     title: "Detección de tráfico HTTP/HTTPS anómalo con NLP",
     description: "Proyecto técnico enfocado en detección temprana de patrones anómalos para mejorar visibilidad y respuesta.",
     stack: ["NLP", "Python", "Ciberseguridad"],
